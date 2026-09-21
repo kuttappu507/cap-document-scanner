@@ -68,3 +68,18 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+
+# Private / not for the public repo
+/universal-ionic-angular-skills/
+/.claude/
+.npmrc
+.env
+.env.*
+*.pem
+*.p12
+*.keystore
+*.jks
+local.properties
+google-services.json
+GoogleService-Info.plist

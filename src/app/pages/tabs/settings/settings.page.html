@@ -1,0 +1,143 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Settings</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid fixed class="ion-padding-horizontal">
+    <ion-row>
+      <ion-col size="12">
+        <ion-list-header class="ion-no-padding"><ion-label>Scanning</ion-label></ion-list-header>
+        <ion-list class="app-inset-list">
+          <ion-item>
+            <ion-range
+              label="Page limit"
+              labelPlacement="stacked"
+              [min]="1"
+              [max]="20"
+              [step]="1"
+              [pin]="true"
+              [value]="settings().pageLimit"
+              (ionChange)="onRangeChange('pageLimit', $event)"
+            >
+              <ion-note slot="end">{{ settings().pageLimit }}</ion-note>
+            </ion-range>
+          </ion-item>
+          <ion-item>
+            <ion-range
+              label="Image quality"
+              labelPlacement="stacked"
+              [min]="10"
+              [max]="100"
+              [step]="10"
+              [snaps]="true"
+              [value]="settings().imageQuality"
+              (ionChange)="onRangeChange('imageQuality', $event)"
+            >
+              <ion-note slot="end">{{ settings().imageQuality }}%</ion-note>
+            </ion-range>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-toggle [checked]="settings().generatePdf" (ionChange)="onToggleChange('generatePdf', $event)">
+              <ion-label>
+                <h2>Create PDF</h2>
+                <p>Combine pages into one file</p>
+              </ion-label>
+            </ion-toggle>
+          </ion-item>
+        </ion-list>
+        <ion-note class="ion-padding-start">On iOS the scanner can't stop at the page limit — extra pages are dropped after scanning.</ion-note>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-list-header class="ion-no-padding"><ion-label>After each scan</ion-label></ion-list-header>
+        <ion-list class="app-inset-list">
+          <ion-item>
+            <ion-icon slot="start" name="folder-outline" color="primary" aria-hidden="true"></ion-icon>
+            <ion-toggle [checked]="settings().saveToFiles" (ionChange)="onToggleChange('saveToFiles', $event)">
+              <ion-label>
+                <h2>Save to Files</h2>
+                <p>{{ filesLocation }}</p>
+              </ion-label>
+            </ion-toggle>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-icon slot="start" name="images-outline" color="primary" aria-hidden="true"></ion-icon>
+            <ion-toggle [checked]="settings().saveToPhotos" (ionChange)="onToggleChange('saveToPhotos', $event)">
+              <ion-label>
+                <h2>Save to Photos</h2>
+                <p>Every page as an image</p>
+              </ion-label>
+            </ion-toggle>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-list-header class="ion-no-padding"><ion-label>Android only</ion-label></ion-list-header>
+        <ion-list class="app-inset-list">
+          <ion-item>
+            <ion-icon slot="start" name="sparkles-outline" color="primary" aria-hidden="true"></ion-icon>
+            <ion-select
+              label="Editing tools"
+              labelPlacement="stacked"
+              interface="action-sheet"
+              [value]="settings().androidScannerMode"
+              (ionChange)="onModeChange($event)"
+            >
+              @for (mode of scannerModes; track mode.value) {
+                <ion-select-option [value]="mode.value">{{ mode.label }}</ion-select-option>
+              }
+            </ion-select>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-icon slot="start" name="images-outline" color="primary" aria-hidden="true"></ion-icon>
+            <ion-toggle
+              [checked]="settings().androidGalleryImportAllowed"
+              (ionChange)="onToggleChange('androidGalleryImportAllowed', $event)"
+            >
+              <ion-label>
+                <h2>Import from gallery</h2>
+                <p>Scan existing photos</p>
+              </ion-label>
+            </ion-toggle>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-list-header class="ion-no-padding"><ion-label>Storage</ion-label></ion-list-header>
+        <ion-list class="app-inset-list">
+          <ion-item>
+            <ion-label>Saved on this device</ion-label>
+            <ion-note slot="end">{{ library.count() }} docs · {{ library.totalPages() }} pages</ion-note>
+          </ion-item>
+          <ion-item button detail="false" (click)="resetSettings()">
+            <ion-icon slot="start" name="refresh-outline" aria-hidden="true"></ion-icon>
+            <ion-label>Reset scanner settings</ion-label>
+          </ion-item>
+          <ion-item button detail="false" lines="none" [disabled]="!library.count()" (click)="deleteAll()">
+            <ion-icon slot="start" name="trash-outline" color="danger" aria-hidden="true"></ion-icon>
+            <ion-label color="danger">Delete all documents</ion-label>
+          </ion-item>
+        </ion-list>
+        <ion-note class="ion-padding-start">
+          Scans use Google ML Kit on Android and Apple VisionKit on iOS. Scans stay on this device.
+        </ion-note>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

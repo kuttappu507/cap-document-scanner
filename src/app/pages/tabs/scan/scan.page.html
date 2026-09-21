@@ -1,0 +1,119 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>DocScan</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">DocScan</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid fixed class="ion-padding-horizontal">
+    <ion-row>
+      <ion-col size="12">
+        <ion-card color="primary">
+          <ion-card-header>
+            <ion-icon name="document-text-outline" aria-hidden="true"></ion-icon>
+            <ion-card-title>Scan a document</ion-card-title>
+            <ion-card-subtitle>Edges are detected and perspective is corrected automatically.</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-button
+              expand="block"
+              size="large"
+              [disabled]="!available() || scanning()"
+              (click)="startScan()"
+              aria-label="Start scanning a document"
+            >
+              @if (saving()) {
+                <ion-spinner slot="start" name="crescent"></ion-spinner>
+                Saving…
+              } @else {
+                <ion-icon slot="start" name="camera-outline" aria-hidden="true"></ion-icon>
+                Start scanning
+              }
+            </ion-button>
+
+            @switch (available()) {
+              @case (true) {
+                <ion-chip>
+                  <ion-icon name="checkmark-circle" aria-hidden="true"></ion-icon>
+                  <ion-label>Native scanner ready</ion-label>
+                </ion-chip>
+              }
+              @case (false) {
+                <ion-chip>
+                  <ion-icon name="information-circle-outline" aria-hidden="true"></ion-icon>
+                  <ion-label>Scanning works on Android and iOS devices</ion-label>
+                </ion-chip>
+              }
+              @default {
+                <ion-chip>
+                  <ion-label>Checking scanner…</ion-label>
+                </ion-chip>
+              }
+            }
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Documents</ion-card-subtitle>
+            <ion-card-title>{{ library.count() }}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Pages</ion-card-subtitle>
+            <ion-card-title>{{ library.totalPages() }}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-list-header class="ion-no-padding">
+          <ion-label>Next scan · change in Settings</ion-label>
+        </ion-list-header>
+        @for (item of settingsSummary(); track item) {
+          <ion-chip color="primary" [outline]="true">
+            <ion-label>{{ item }}</ion-label>
+          </ion-chip>
+        }
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-list-header class="ion-no-padding">
+          <ion-label>Recent</ion-label>
+        </ion-list-header>
+
+        @if (library.recent().length) {
+          <ion-list class="app-inset-list" aria-label="Recent scans">
+            @for (document of library.recent(); track document.id) {
+              <app-document-item [document]="document" (selected)="openDocument($event)"></app-document-item>
+            }
+          </ion-list>
+        } @else {
+          <app-empty-state
+            icon="scan-outline"
+            heading="No scans yet"
+            message="Your scanned documents will show up here."
+          ></app-empty-state>
+        }
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

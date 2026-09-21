@@ -1,0 +1,14 @@
+<ion-item button detail="true" lines="full" (click)="selected.emit(document())" [attr.aria-label]="'Open ' + document().title">
+  <ion-thumbnail slot="start">
+    @if (document().pages[0]; as cover) {
+      <img [src]="cover | fileSrc" alt="" loading="lazy" decoding="async" />
+    }
+  </ion-thumbnail>
+  <ion-label>
+    <h2>{{ document().title }}</h2>
+    <p>{{ document().createdAt | date: 'mediumDate' }} · {{ document().pages.length }} {{ document().pages.length === 1 ? 'page' : 'pages' }}</p>
+  </ion-label>
+  @if (document().pdf) {
+    <ion-badge slot="end" color="secondary">PDF</ion-badge>
+  }
+</ion-item>

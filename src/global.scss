@@ -35,3 +35,40 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+/* ── App-wide defaults (shared by every page) ─────────────── */
+ion-toolbar {
+  --border-width: 0;
+}
+
+ion-title {
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+ion-card {
+  margin-inline: 0;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+ion-list-header {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+  color: var(--app-on-surface-variant);
+}
+
+ion-list.app-inset-list {
+  margin-inline: 0;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+ion-thumbnail {
+  --size: var(--size-thumbnail);
+  overflow: hidden;
+  --border-radius: var(--radius-sm);
+  background: var(--app-surface-sunken);
+}

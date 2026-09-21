@@ -1,0 +1,28 @@
+ion-content ion-grid {
+  padding-bottom: var(--space-xl);
+
+  ion-col > ion-note {
+    display: block;
+    margin-top: var(--space-xs);
+    font-size: var(--font-size-xs);
+    line-height: 1.5;
+  }
+
+  ion-list ion-item {
+    ion-range {
+      --bar-border-radius: var(--radius-pill);
+      --knob-size: var(--size-range-knob);
+
+      ion-note {
+        min-width: 3ch;
+        text-align: end;
+        font-weight: var(--font-weight-bold);
+        color: var(--ion-color-primary);
+      }
+    }
+
+    ion-toggle ion-label p {
+      color: var(--app-on-surface-variant);
+    }
+  }
+}

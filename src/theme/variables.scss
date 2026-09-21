@@ -1,2 +1,135 @@
-// For information on how to create your own theme, please refer to:
-// https://ionicframework.com/docs/theming/
+// Design tokens — the single source of truth for colour, spacing, radius,
+// typography and elevation. Components and pages must reference these tokens
+// and never hardcode values.
+// Docs: https://ionicframework.com/docs/theming/colors
+
+:root {
+  /* ── Ionic palette ─────────────────────────────────────────── */
+  --ion-color-primary: #2b4acb;
+  --ion-color-primary-rgb: 43, 74, 203;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #2641b3;
+  --ion-color-primary-tint: #405cd0;
+
+  --ion-color-secondary: #e8a33d;
+  --ion-color-secondary-rgb: 232, 163, 61;
+  --ion-color-secondary-contrast: #1c1a17;
+  --ion-color-secondary-contrast-rgb: 28, 26, 23;
+  --ion-color-secondary-shade: #cc8f36;
+  --ion-color-secondary-tint: #eaac50;
+
+  --ion-color-success: #1f8a5b;
+  --ion-color-success-rgb: 31, 138, 91;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: #1b7950;
+  --ion-color-success-tint: #35966b;
+
+  --ion-color-danger: #c8372d;
+  --ion-color-danger-rgb: 200, 55, 45;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #b03028;
+  --ion-color-danger-tint: #ce4b42;
+
+  --ion-color-medium: #6b675f;
+  --ion-color-medium-rgb: 107, 103, 95;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #5e5b54;
+  --ion-color-medium-tint: #7a766f;
+
+  /* ── App surfaces (warm "paper" neutrals) ──────────────────── */
+  --app-background: #f5f3ee;
+  --app-background-rgb: 245, 243, 238;
+  --app-surface: #ffffff;
+  --app-surface-sunken: #ebe8e0;
+  --app-on-surface: #1c1a17;
+  --app-on-surface-variant: #5f5b53;
+  --app-outline: #d9d5cb;
+  --app-primary-soft: rgba(var(--ion-color-primary-rgb), 0.1);
+  --app-secondary-soft: rgba(var(--ion-color-secondary-rgb), 0.16);
+
+  --ion-background-color: var(--app-background);
+  --ion-background-color-rgb: var(--app-background-rgb);
+  --ion-text-color: var(--app-on-surface);
+  --ion-toolbar-background: var(--app-background);
+  --ion-tab-bar-background: var(--app-surface);
+  --ion-item-background: var(--app-surface);
+  --ion-card-background: var(--app-surface);
+  --ion-border-color: var(--app-outline);
+
+  /* ── Spacing ───────────────────────────────────────────────── */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+
+  /* ── Radius ────────────────────────────────────────────────── */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  /* ── Elevation ─────────────────────────────────────────────── */
+  --shadow-card: 0 1px 2px rgba(28, 26, 23, 0.06), 0 8px 24px rgba(28, 26, 23, 0.06);
+  --shadow-cta: 0 10px 24px rgba(var(--ion-color-primary-rgb), 0.32);
+
+  /* ── Typography (system font stack — bundled with the OS, no CDN) ── */
+  --ion-font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', Roboto, 'Helvetica Neue', sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.625rem;
+  --font-size-display: clamp(1.75rem, 7vw, 2.25rem);
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-caps: 0.08em;
+
+  /* ── Sizes ─────────────────────────────────────────────────── */
+  --size-thumbnail: 56px;
+  --size-icon-hero: 56px;
+  --size-cta-height: 56px;
+  --size-range-knob: 24px;
+  --size-page-aspect: 3 / 4;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ion-color-primary: #8ea2ff;
+    --ion-color-primary-rgb: 142, 162, 255;
+    --ion-color-primary-contrast: #0f1330;
+    --ion-color-primary-contrast-rgb: 15, 19, 48;
+    --ion-color-primary-shade: #7d8ee0;
+    --ion-color-primary-tint: #99abff;
+
+    --ion-color-medium: #a39f96;
+    --ion-color-medium-rgb: 163, 159, 150;
+
+    --app-background: #141311;
+    --app-background-rgb: 20, 19, 17;
+    --app-surface: #1f1d1a;
+    --app-surface-sunken: #2a2824;
+    --app-on-surface: #f2efe8;
+    --app-on-surface-variant: #b2ada3;
+    --app-outline: #3a3732;
+
+    --ion-background-color: var(--app-background);
+    --ion-background-color-rgb: var(--app-background-rgb);
+    --ion-text-color: var(--app-on-surface);
+    --ion-toolbar-background: var(--app-background);
+    --ion-tab-bar-background: var(--app-surface);
+    --ion-item-background: var(--app-surface);
+    --ion-card-background: var(--app-surface);
+
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-cta: 0 10px 24px rgba(0, 0, 0, 0.4);
+  }
+}

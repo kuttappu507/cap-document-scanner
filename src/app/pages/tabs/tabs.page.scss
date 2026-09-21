@@ -1,0 +1,11 @@
+ion-tab-bar {
+  --border: 1px solid var(--app-outline);
+
+  ion-tab-button {
+    --color-selected: var(--ion-color-primary);
+
+    ion-label {
+      font-weight: var(--font-weight-medium);
+    }
+  }
+}

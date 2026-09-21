@@ -1,0 +1,51 @@
+ion-content ion-grid {
+  padding-bottom: var(--space-xl);
+
+  ion-card[color='primary'] {
+    --background: radial-gradient(circle at 100% 0%, rgba(var(--ion-color-primary-contrast-rgb), 0.2), transparent 60%),
+      var(--ion-color-primary);
+    box-shadow: var(--shadow-cta);
+
+    ion-card-header {
+      gap: var(--space-xs);
+
+      ion-icon {
+        font-size: var(--size-icon-hero);
+      }
+
+      ion-card-title {
+        font-size: var(--font-size-display);
+        font-weight: var(--font-weight-bold);
+        letter-spacing: var(--letter-spacing-tight);
+      }
+
+      ion-card-subtitle {
+        color: inherit;
+        opacity: 0.85;
+        font-size: var(--font-size-sm);
+        text-transform: none;
+        letter-spacing: normal;
+      }
+    }
+
+    ion-button {
+      --background: var(--ion-color-primary-contrast);
+      --color: var(--ion-color-primary);
+      --border-radius: var(--radius-pill);
+      --box-shadow: none;
+      min-height: var(--size-cta-height);
+      font-weight: var(--font-weight-bold);
+    }
+
+    ion-chip {
+      --background: rgba(var(--ion-color-primary-contrast-rgb), 0.16);
+      --color: var(--ion-color-primary-contrast);
+      margin: var(--space-sm) 0 0;
+    }
+  }
+
+  ion-row:nth-of-type(2) ion-card-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+  }
+}

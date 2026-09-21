@@ -1,0 +1,113 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/library"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ document()?.title ?? 'Document' }}</ion-title>
+    @if (document(); as doc) {
+      <ion-buttons slot="end">
+        <ion-button (click)="rename(doc)" aria-label="Rename document">
+          <ion-icon slot="icon-only" name="create-outline" aria-hidden="true"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    }
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  @if (document(); as doc) {
+    <ion-grid fixed class="ion-padding">
+      <ion-row>
+        <ion-col size="12">
+          <ion-text>
+            <h1>{{ doc.title }}</h1>
+            <p>
+              {{ doc.createdAt | date: 'medium' }} · {{ doc.pages.length }} {{ doc.pages.length === 1 ? 'page' : 'pages' }}
+              @if (doc.pdf) {
+                <ion-badge color="secondary">PDF</ion-badge>
+              }
+            </p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-list-header class="ion-no-padding"><ion-label>Saved on this device</ion-label></ion-list-header>
+          <ion-list class="app-inset-list">
+            <ion-item [button]="!doc.savedToFiles" [detail]="false" (click)="doc.savedToFiles || saveToFiles(doc)">
+              <ion-icon slot="start" name="folder-outline" color="primary" aria-hidden="true"></ion-icon>
+              <ion-label>
+                <h2>{{ doc.savedToFiles ? 'Saved to Files' : 'Save to Files' }}</h2>
+                <p>{{ doc.savedToFiles ? doc.savedToFiles : filesLocation }}</p>
+              </ion-label>
+              @if (exporting() === 'files') {
+                <ion-spinner slot="end" name="crescent"></ion-spinner>
+              } @else if (doc.savedToFiles) {
+                <ion-icon slot="end" name="checkmark-circle" color="success" aria-label="Saved"></ion-icon>
+              }
+            </ion-item>
+            <ion-item lines="none" [button]="!doc.savedToPhotos" [detail]="false" (click)="doc.savedToPhotos || saveToPhotos(doc)">
+              <ion-icon slot="start" name="images-outline" color="primary" aria-hidden="true"></ion-icon>
+              <ion-label>
+                <h2>{{ doc.savedToPhotos ? 'Saved to Photos' : 'Save to Photos' }}</h2>
+                <p>Every page as an image in your gallery</p>
+              </ion-label>
+              @if (exporting() === 'photos') {
+                <ion-spinner slot="end" name="crescent"></ion-spinner>
+              } @else if (doc.savedToPhotos) {
+                <ion-icon slot="end" name="checkmark-circle" color="success" aria-label="Saved"></ion-icon>
+              }
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-list-header class="ion-no-padding"><ion-label>Pages</ion-label></ion-list-header>
+        </ion-col>
+        @for (page of doc.pages; track page; let index = $index) {
+          <ion-col size="6" size-md="4">
+            <ion-card button (click)="openPage(page)" [attr.aria-label]="'Open page ' + (index + 1)">
+              <img [src]="page | fileSrc" [alt]="'Page ' + (index + 1) + ' of ' + doc.title" loading="lazy" decoding="async" />
+              <ion-card-header>
+                <ion-card-subtitle>Page {{ index + 1 }}</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+        }
+      </ion-row>
+    </ion-grid>
+  } @else {
+    <app-empty-state
+      icon="document-outline"
+      heading="Document not found"
+      message="It may have been deleted."
+    ></app-empty-state>
+  }
+</ion-content>
+
+@if (document(); as doc) {
+  <ion-footer>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button color="danger" (click)="remove(doc)" aria-label="Delete document">
+          <ion-icon slot="icon-only" name="trash-outline" aria-hidden="true"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button (click)="share(doc)">
+          <ion-icon slot="start" name="share-outline" aria-hidden="true"></ion-icon>
+          Share
+        </ion-button>
+        @if (doc.pdf) {
+          <ion-button [strong]="true" (click)="openPdf(doc)">
+            <ion-icon slot="start" name="document-text-outline" aria-hidden="true"></ion-icon>
+            Open PDF
+          </ion-button>
+        }
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>
+}

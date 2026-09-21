@@ -1,0 +1,24 @@
+ion-item {
+  --padding-top: var(--space-xs);
+  --padding-bottom: var(--space-xs);
+
+  ion-thumbnail img {
+    object-fit: cover;
+  }
+
+  ion-label h2 {
+    font-weight: var(--font-weight-medium);
+  }
+
+  ion-badge {
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-caps);
+  }
+}
+
+// Hide the divider under the last row of a list (plain or sliding).
+:host(:last-child) ion-item,
+:host-context(ion-item-sliding:last-child) ion-item {
+  --border-width: 0;
+  --inner-border-width: 0;
+}

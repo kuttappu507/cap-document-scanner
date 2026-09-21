@@ -1,0 +1,21 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="scan" href="/tabs/scan">
+      <ion-icon name="scan-outline" aria-hidden="true"></ion-icon>
+      <ion-label>Scan</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="library" href="/tabs/library">
+      <ion-icon name="documents-outline" aria-hidden="true"></ion-icon>
+      <ion-label>Library</ion-label>
+      @if (library.count()) {
+        <ion-badge color="primary" [attr.aria-label]="library.count() + ' documents'">{{ library.count() }}</ion-badge>
+      }
+    </ion-tab-button>
+
+    <ion-tab-button tab="settings" href="/tabs/settings">
+      <ion-icon name="settings-outline" aria-hidden="true"></ion-icon>
+      <ion-label>Settings</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

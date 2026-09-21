@@ -1,0 +1,8 @@
+<ion-icon [name]="icon()" color="primary" aria-hidden="true"></ion-icon>
+<ion-text>
+  <h2>{{ heading() }}</h2>
+  @if (message()) {
+    <p>{{ message() }}</p>
+  }
+</ion-text>
+<ng-content></ng-content>
