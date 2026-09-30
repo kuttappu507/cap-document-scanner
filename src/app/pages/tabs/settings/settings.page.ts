@@ -3,7 +3,7 @@ import {
   IonContent, IonGrid, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonNote, IonRange, IonRow, IonCol,
   IonSelect, IonSelectOption, IonTitle, IonToggle, IonToolbar, RangeCustomEvent, SelectCustomEvent, ToggleCustomEvent,
 } from '@ionic/angular';
-import { ScannerMode } from '@capawesome-team/capacitor-document-scanner';
+import { ScannerMode } from '../../../plugins/document-scanner';
 import { addIcons } from 'ionicons';
 import { folderOutline, imagesOutline, logoAndroid, refreshOutline, sparklesOutline, trashOutline } from 'ionicons/icons';
 import { ScanSettings } from '../../../interfaces/scan-settings.interface';
@@ -37,9 +37,9 @@ export class SettingsPage {
 
   protected readonly settings = this.settingsService.settings;
   protected readonly scannerModes: ScannerModeOption[] = [
-    { value: ScannerMode.Base, label: 'Basic (crop, rotate)' },
-    { value: ScannerMode.BaseWithFilter, label: 'Filters (+ enhance)' },
-    { value: ScannerMode.Full, label: 'Full (+ auto clean-up)' },
+    { value: 'base', label: 'Basic (crop, rotate)' },
+    { value: 'filter', label: 'Filters (+ enhance)' },
+    { value: 'full', label: 'Full (+ auto clean-up)' },
   ];
 
   constructor() {
