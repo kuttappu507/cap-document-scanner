@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
-import { ScannerMode } from '@capawesome-team/capacitor-document-scanner';
+import { ScannerMode } from '../../plugins/document-scanner';
 import { StorageKeys } from '../../enums/storage-keys.enum';
 import { ScanSettings } from '../../interfaces/scan-settings.interface';
 
@@ -8,7 +8,7 @@ export const DEFAULT_SCAN_SETTINGS: ScanSettings = {
   pageLimit: 10,
   imageQuality: 90,
   generatePdf: true,
-  androidScannerMode: ScannerMode.Full,
+  androidScannerMode: 'full',
   androidGalleryImportAllowed: true,
   saveToFiles: true,
   saveToPhotos: false,
