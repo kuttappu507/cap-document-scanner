@@ -30,7 +30,6 @@
     "@capacitor/preferences": "^8.0.1",
     "@capacitor/share": "^8.0.2",
     "@capacitor/status-bar": "8.0.3",
-    "@capawesome-team/capacitor-document-scanner": "^0.1.1",
     "@capawesome-team/capacitor-file-opener": "^8.0.5",
     "@ionic/angular": "^9.0.0",
     "ionicons": "^8.1.0",
@@ -51,5 +50,5 @@
     "typescript-eslint": "^8.61.0",
     "vitest": "~4.0.18"
   },
-  "description": "An Ionic project"
+  "description": "An Ionic document scanner"
 }
